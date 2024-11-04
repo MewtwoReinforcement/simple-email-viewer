@@ -15,5 +15,5 @@ jobs:
       uses: pozil/auto-assign-issue@v1
       with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
-          assignees: aidanprior
-          numOfAssignee: 1
+          assignees: aidanprior, austinchengg, mmeyer23, astew220, mccarthyrj
+          numOfAssignee: 5

@@ -2,8 +2,52 @@
   "name": "demo-repo",
   "version": "0.2.0",
   "description": "A sample package.json",
-  "dependencies": {
-    "@primer/css": "17.0.1"
+  "type": "module",
+  "scripts": {
+    "start": "NODE_ENV=production ts-node server/server.ts",
+    "dev": "NODE_ENV=development concurrently \"webpack serve\" \"nodemon server/server.ts\"",
+    "lint": "prettier-eslint --list-different \"**/*.js\" \"**/*.ts\" \"**/*.tsx\" \"**/*.json\"",
+    "format": "prettier-eslint --write --list-different \"**/*.js\" \"**/*.ts\" \"**/*.tsx\"  \"**/*.json\""
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.12.3",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "ts-node": "^10.9.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.25.2",
+    "@babel/preset-env": "^7.25.4",
+    "@babel/preset-react": "^7.24.7",
+    "@eslint/js": "^9.11.1",
+    "@tsconfig/recommended": "^1.0.8",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.7.5",
+    "@types/react": "^18.3.11",
+    "@types/react-dom": "^18.3.1",
+    "@typescript-eslint/eslint-plugin": "^8.13.0",
+    "@typescript-eslint/parser": "^8.13.0",
+    "babel-loader": "^9.2.1",
+    "concurrently": "^6.0.2",
+    "cross-env": "^7.0.3",
+    "css-loader": "^7.1.2",
+    "eslint": "^8.57.1",
+    "eslint-plugin-react": "^7.37.2",
+    "eslint-plugin-react-hooks": "^5.1.0-rc.0",
+    "eslint-plugin-react-refresh": "^0.4.12",
+    "html-webpack-plugin": "^5.6.3",
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.7",
+    "prettier": "^3.3.3",
+    "prettier-eslint": "^16.3.0",
+    "prettier-eslint-cli": "^8.0.1",
+    "sass": "^1.78.0",
+    "sass-loader": "^16.0.3",
+    "style-loader": "^4.0.0",
+    "typescript": "^5.6.3",
+    "webpack": "^5.96.1",
+    "webpack-cli": "^5.0.0",
+    "webpack-dev-server": "^5.1.0"
+  }
 }
