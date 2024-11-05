@@ -1,5 +1,5 @@
-describe("placeholder tests", () => {
-  it("placeholder test", () => {
-    expect("Pass").toBe("Pass");
+describe('placeholder tests', () => {
+  it('placeholder test', () => {
+    expect('Pass').toBe('Pass');
   });
 });
