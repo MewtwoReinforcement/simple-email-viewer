@@ -12,6 +12,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@types/cors": "^2.8.17",
     "dotenv": "^16.4.5",
     "express": "^4.12.3",
     "googleapis": "^144.0.0",
