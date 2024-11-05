@@ -1,42 +1,36 @@
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: "./client/index.ts",
+  entry: './client/index.ts',
   output: {
-    path: path.join(__dirname, "/dist"),
-    filename: "bundle.js",
-    publicPath: "/dist/",
+    path: path.join(__dirname, '/dist'),
+    filename: 'bundle.js',
+    publicPath: '/',
   },
-  mode: "development",
-  plugins: [new HtmlWebpackPlugin({ template: "./public/index.html" })],
+  mode: 'development',
+  plugins: [new HtmlWebpackPlugin({ template: './client/index.html' })],
   devServer: {
     static: {
-      directory: path.resolve(__dirname, "public"),
+      directory: path.resolve(__dirname, 'public'),
     },
     port: 8080,
   },
-  devtool: "inline-source-map",
+  devtool: 'inline-source-map',
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test: /\.tsx?$/,
         exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
-          options: {
-            targets: "defaults",
-            presets: [["@babel/env"], ["@babel/react"]],
-          },
-        },
+        use: 'ts-loader',
       },
       {
         test: /\.s?css$/,
-        use: ["style-loader", "css-loader", "sass-loader"],
+        use: ['style-loader', 'css-loader', 'sass-loader'],
       },
     ],
   },
   resolve: {
-    extensions: [".ts", ".tsx", ".js", ".jsx"],
+    extensions: ['.ts', '.tsx', '.js'],
   },
 };
