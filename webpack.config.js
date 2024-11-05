@@ -1,18 +1,18 @@
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+import path from "path";
+import HtmlWebpackPlugin from "html-webpack-plugin";
 
-module.exports = {
+export default {
   entry: "./client/index.ts",
   output: {
-    path: path.join(__dirname, "/dist"),
+    path: path.join(import.meta.dirname, "/dist"),
     filename: "bundle.js",
-    publicPath: "/dist/",
+    publicPath: "/",
   },
   mode: "development",
-  plugins: [new HtmlWebpackPlugin({ template: "./public/index.html" })],
+  plugins: [new HtmlWebpackPlugin({ template: "./client/index.html" })],
   devServer: {
     static: {
-      directory: path.resolve(__dirname, "public"),
+      directory: path.resolve(import.meta.dirname, "public"),
     },
     port: 8080,
   },
@@ -20,15 +20,9 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test: /\.tsx?$/,
         exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
-          options: {
-            targets: "defaults",
-            presets: [["@babel/env"], ["@babel/react"]],
-          },
-        },
+        use: "ts-loader",
       },
       {
         test: /\.s?css$/,
@@ -37,6 +31,6 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: [".ts", ".tsx", ".js", ".jsx"],
+    extensions: [".ts", ".tsx", ".js"],
   },
 };
