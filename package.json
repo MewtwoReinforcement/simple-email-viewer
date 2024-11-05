@@ -13,6 +13,7 @@
   "license": "MIT",
   "dependencies": {
     "@types/cors": "^2.8.17",
+    "bcrpyt": "^2.0.0",
     "dotenv": "^16.4.5",
     "express": "^4.12.3",
     "googleapis": "^144.0.0",
@@ -30,7 +31,6 @@
     "@types/node": "^22.9.0",
     "@types/react": "^18.3.11",
     "@types/react-dom": "^18.3.1",
-    "typescript-eslint": "^8.13.0",
     "@typescript-eslint/parser": "^8.13.0",
     "concurrently": "^6.0.2",
     "cross-env": "^7.0.3",
@@ -56,6 +56,7 @@
     "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.6.3",
+    "typescript-eslint": "^8.13.0",
     "webpack": "^5.96.1",
     "webpack-cli": "^5.0.0",
     "webpack-dev-server": "^5.1.0"
