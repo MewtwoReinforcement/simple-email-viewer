@@ -39,6 +39,10 @@ app.post('/users', (req: Request, res: Response): void => {
     .sendFile(path.resolve(__dirname, '../client/index.html'));
 });
 
+app.get('/oauth', (_req: Request, res: Response) => {
+  res.status(201).send('superb!');
+});
+
 app.listen(port, () => {
   console.log(`Server listening on port:${port}`);
 });
