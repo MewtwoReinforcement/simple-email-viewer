@@ -7,7 +7,7 @@ import tseslint from "@typescript-eslint/eslint-plugin";
 export default [
   { ignores: ["dist", "node_modules"] },
   {
-    files: ["**/*.{ts,tsx,js,jsx,json}"],
+    files: ["client/**/*.{ts,tsx}"],
     plugins: {
       tseslint: tseslint,
       react: react,
@@ -17,7 +17,6 @@ export default [
     rules: {
       semi: "error",
       "prefer-const": "error",
-      // ...reactHooks.recommended.rules,
       "react-refresh/only-export-components": [
         "warn",
         { allowConstantExport: true },
@@ -33,7 +32,7 @@ export default [
       },
     },
   },
-  ...js.configs.recommended,
+  // ...js.configs.recommended,
   ...tseslint.configs.recommendedTypeChecked,
   ...tseslint.configs.stylisticTypeChecked,
 ];

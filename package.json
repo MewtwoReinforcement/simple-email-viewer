@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack",
     "start": "NODE_ENV=production ts-node server/server.ts",
-    "dev": "NODE_ENV=development concurrently \"webpack serve\" \"nodemon server/server.ts\"",
+    "dev": "NODE_ENV=development concurrently \"webpack serve\" \"nodemon\"",
     "test": "jest --verbose",
     "lint": "prettier-eslint --list-different \"**/*.js\" \"**/*.ts\" \"**/*.tsx\" \"**/*.json\"",
     "format": "prettier-eslint --write --list-different \"**/*.js\" \"**/*.ts\" \"**/*.tsx\"  \"**/*.json\""
@@ -15,15 +15,11 @@
   "dependencies": {
     "express": "^4.12.3",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "ts-node": "^10.9.2"
+    "react-dom": "^17.0.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.25.2",
-    "@babel/preset-env": "^7.25.4",
-    "@babel/preset-react": "^7.24.7",
-    "@eslint/js": "^9.11.1",
     "@tsconfig/recommended": "^1.0.8",
+    "@eslint/js": "^9.11.1",
     "@types/express": "^5.0.0",
     "@types/jest": "^29.5.14",
     "@types/node": "^22.7.5",
@@ -48,9 +44,18 @@
     "sass": "^1.78.0",
     "sass-loader": "^16.0.3",
     "style-loader": "^4.0.0",
+    "ts-loader": "^9.5.1",
+    "ts-node": "^10.9.2",
     "typescript": "^5.6.3",
     "webpack": "^5.96.1",
     "webpack-cli": "^5.0.0",
     "webpack-dev-server": "^5.1.0"
+  },
+  "nodemon": {
+    "watch": [
+      "server"
+    ],
+    "ext": "ts",
+    "exec": "ts-node -P server/tsconfig.json ./server/server.ts"
   }
 }
