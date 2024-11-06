@@ -9,7 +9,7 @@ import { randomBytes } from 'crypto';
 const oAuth2Client = new google.auth.OAuth2(
   process.env.CLIENT_ID,
   process.env.CLIENT_SECRET,
-  'http://localhost:3000/oauth',
+  'http://localhost:3000/oauth'
 );
 
 function generateSessionId(): string {
@@ -108,8 +108,16 @@ const googleController: Record<string, RequestHandler> = {
           });
           await newUser.save();
         }
+        res.cookie('googleId', id, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === 'production',
+          maxAge: 3600000,
+        });
 
-        return next();
+        return res.json({
+          message: 'User successfully authenticated',
+          googleId: id,
+        });
       } catch (error) {
         return next({
           log:
@@ -207,7 +215,7 @@ const googleController: Record<string, RequestHandler> = {
         };
 
         const dbContact = dbContacts.find(
-          (contact) => contact.email === contactData.email,
+          (contact) => contact.email === contactData.email
         );
 
         if (dbContact) {

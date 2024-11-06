@@ -61,6 +61,7 @@
     "sass": "^1.78.0",
     "sass-loader": "^16.0.3",
     "style-loader": "^4.0.0",
+    "supertest": "^7.0.0",
     "ts-loader": "^9.5.1",
     "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",

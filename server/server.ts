@@ -52,9 +52,6 @@ app.get('/login', googleController.initiateOAuth);
 app.get(
   '/oauth',
   googleController.saveOAuthDetails,
-  (req: Request, res: Response) => {
-    res.send('OAuth flow completed! You can now access Gmail data.');
-  },
 );
 
 app.use((req: Request, res: Response, next: NextFunction) => {
