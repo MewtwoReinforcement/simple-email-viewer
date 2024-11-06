@@ -6,7 +6,7 @@ import { Message } from '../client/types.ts';
 const oAuth2Client = new google.auth.OAuth2(
   process.env.CLIENT_ID,
   process.env.CLIENT_SECRET,
-  'http://localhost:3000/oauth'
+  'http://localhost:3000/oauth',
 );
 /**
  *
@@ -26,7 +26,7 @@ const updateMessages = async (user: IUser): Promise<void> => {
           await gmail.users.messages.get({
             userId: 'me',
             id: message.id ?? undefined,
-          })
+          }),
       )) ?? [];
 
     for (const message of await Promise.all(messages)) {

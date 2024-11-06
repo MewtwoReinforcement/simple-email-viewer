@@ -7,7 +7,7 @@ import { randomBytes } from 'crypto';
 const oAuth2Client = new google.auth.OAuth2(
   process.env.CLIENT_ID,
   process.env.CLIENT_SECRET,
-  'http://localhost:3000/oauth'
+  'http://localhost:3000/oauth',
 );
 
 function generateSessionId(): string {
@@ -87,7 +87,7 @@ const googleController: Record<string, RequestHandler> = {
     if (req.query.code !== undefined && typeof req.query.code === 'string') {
       const oAuthCode = req.query.code;
       const sessionId = req.query.state as string;
-      const state = req.query.state as string;
+      // const state = req.query.state as string;
 
       // console.log('Received OAuth code:', oAuthCode);
       // console.log('Received state from Google:', state);
