@@ -7,7 +7,7 @@ import { randomBytes } from 'crypto';
 const oAuth2Client = new google.auth.OAuth2(
   process.env.CLIENT_ID,
   process.env.CLIENT_SECRET,
-  'http://localhost:3000/oauth'
+  'http://localhost:3000/oauth',
 );
 
 function generateSessionId(): string {
@@ -156,7 +156,7 @@ const googleController: Record<string, RequestHandler> = {
               userId: 'me',
               id: message.id ?? 'no id',
             })
-          ).data.payload?.body?.data
+          ).data.payload?.body?.data,
       );
       return next();
     } catch (error) {
