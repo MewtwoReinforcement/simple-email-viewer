@@ -20,6 +20,8 @@
     "express": "^4.12.3",
     "googleapis": "^144.0.0",
     "imap": "^0.8.19",
+    "mongodb": "^6.10.0",
+    "mongoose": "^8.8.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router-dom": "^6.27.0"

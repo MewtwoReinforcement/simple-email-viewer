@@ -1,8 +1,19 @@
 import path from 'path';
 import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
-import googleController from '../server/controllers/googleController';
+import mongoose from 'mongoose';
+import 'dotenv/config';
+import googleController from './controllers/googleController';
 import cookieParser from 'cookie-parser';
+
+mongoose
+  .connect(process.env.MONGO_URI as string)
+  .then((result): void => {
+    console.log('DB connected', result);
+  })
+  .catch((err: string) => {
+    console.log('Failed', err);
+  });
 
 const app = express();
 const port: number = Number(process.env.port) || 3000;
@@ -56,6 +67,40 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   console.error('Error occurred:', err);
 
+app.get(
+  '/users/:id/messages',
+  googleController.getMessages,
+  (req: Request, res: Response): void => {
+    return res.status(200).json(res.locals.messages);
+  }
+);
+
+app.get(
+  '/users/:id/contacts',
+  googleController.getContacts,
+  (req: Request, res: Response): void => {
+    return res.status(200).json(res.locals.contacts);
+  }
+);
+
+app.post(
+  '/users/:id/contacts',
+  googleController.addContacts,
+  (req: Request, res: Response): void => {
+    return res.status(200).json(res.locals.contacts);
+  }
+);
+
+app.delete(
+  '/users/:id/contacts',
+  googleController.addContacts,
+  (req: Request, res: Response): void => {
+    return res.status(200).json(res.locals.contacts);
+  }
+);
+
+app.get('/oauth', (_req: Request, res: Response) => {
+  res.status(201).send('superb!');
   if (err.response) {
     console.error('Response from external API:', err.response.data);
   }
