@@ -21,7 +21,7 @@ const googleController: Record<string, RequestHandler> = {
    * An Express Middleware Function
    *  that redirects the user to a google OAuth 2.0 signin link
    */
-  initiateOAuth: (_req: Request, res: Response, next: NextFunction) => {
+  initiateOAuth: (_req: Request, res: Response, _next: NextFunction) => {
     const sessionId = generateSessionId();
     const cookieOptions =
       process.env.NODE_ENV === 'production'
