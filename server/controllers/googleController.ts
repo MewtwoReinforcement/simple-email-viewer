@@ -165,7 +165,7 @@ const googleController: Record<string, RequestHandler> = {
           await newUser.save();
         }
         res.cookie('googleId', id, {
-          httpOnly: true,
+          httpOnly: false,
           secure: process.env.NODE_ENV === 'production',
           maxAge: 3600000,
         });
