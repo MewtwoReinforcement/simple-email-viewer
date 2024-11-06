@@ -15,6 +15,4 @@ const fakeMessage = {
   raw: 'etc',
 };
 
-const whiteListed = (message) => {
-
-}
+const whiteListed = (message) => {};
