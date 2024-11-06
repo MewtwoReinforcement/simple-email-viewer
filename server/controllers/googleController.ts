@@ -16,6 +16,44 @@ function generateSessionId(): string {
   return randomBytes(16).toString('hex');
 }
 
+function isTokenExpired(expiryDate: number): boolean {
+  return Date.now() >= expiryDate;
+}
+
+const refreshAccessToken = async (userId: string) => {
+  const user = await User.findOne({ _id: userId });
+  if (!user || !user.oauthTokens.refresh_token) {
+    throw new Error('No refresh token found for this user');
+  }
+
+  try {
+    const response = await oAuth2Client.refreshAccessToken();
+
+    const accessToken = response.credentials.access_token;
+    const refreshToken =
+      response.credentials.refresh_token || user.oauthTokens.refresh_token;
+
+    oAuth2Client.setCredentials({
+      access_token: accessToken,
+      refresh_token: refreshToken,
+    });
+
+    user.oauthTokens.access_token = accessToken;
+    user.oauthTokens.refresh_token = refreshToken;
+    if (response.credentials.expiry_date) {
+      user.tokenExpiry = new Date(response.credentials.expiry_date).getTime();
+    } else {
+      user.tokenExpiry = Date.now();
+    }
+
+    await user.save();
+
+    return accessToken;
+  } catch (error) {
+    throw new Error(`Error refreshing access token`);
+  }
+};
+
 const googleController: Record<string, RequestHandler> = {
   /**
    * An Express Middleware Function
@@ -53,10 +91,10 @@ const googleController: Record<string, RequestHandler> = {
       const sessionId = req.query.state as string;
       const state = req.query.state as string;
 
-      console.log('Received OAuth code:', oAuthCode);
-      console.log('Received state from Google:', state);
-      console.log('Session ID from cookie:', sessionId);
-      console.log('Query Params:', req.query);
+      // console.log('Received OAuth code:', oAuthCode);
+      // console.log('Received state from Google:', state);
+      // console.log('Session ID from cookie:', sessionId);
+      // console.log('Query Params:', req.query);
 
       try {
         const { tokens } = await oAuth2Client.getToken(oAuthCode);
@@ -75,36 +113,54 @@ const googleController: Record<string, RequestHandler> = {
           ? tokens.refresh_token
           : null;
 
+        const expiryDate = tokens.expiry_date;
+
         oAuth2Client.setCredentials({
           access_token: accessToken,
           refresh_token: refreshToken,
         });
-        //we are setting authentication globally to oAuth2Client for all future API requests
+
         google.options({ auth: oAuth2Client });
-        //we are connecting and retrieving the authenticated users profile info
+
         const oauth2 = google.oauth2('v2');
         const userInfo = await oauth2.userinfo.v2.me.get({
           auth: oAuth2Client,
         });
+
         const { id, email } = userInfo.data;
 
-        const existingUser = await User.findOne({ email });
-        if (existingUser) {
-          existingUser.oauthTokens = {
+        const user = await User.findOne({ email });
+
+        if (user) {
+          if (isTokenExpired(user.tokenExpiry)) {
+            const newAccessToken = await refreshAccessToken(user.id);
+            oAuth2Client.setCredentials({
+              access_token: newAccessToken,
+              refresh_token: user.oauthTokens.refresh_token,
+            });
+          }
+
+          user.sessionId = sessionId;
+          user.oauthTokens = {
             access_token: accessToken,
             refresh_token: refreshToken,
           };
-          existingUser.sessionId = sessionId;
-          await existingUser.save();
+          user.tokenExpiry = expiryDate
+            ? new Date(expiryDate).getTime()
+            : Date.now();
+          await user.save();
         } else {
           const newUser = new User({
-            email: email,
+            email,
             googleId: id,
             oauthTokens: {
               access_token: accessToken,
               refresh_token: refreshToken,
             },
             sessionId: sessionId,
+            tokenExpiry: expiryDate
+              ? new Date(expiryDate).getTime()
+              : Date.now(),
           });
           await newUser.save();
         }
