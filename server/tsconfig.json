@@ -4,6 +4,6 @@
     "module": "CommonJS",
     "outDir": "./build"
   },
-  "include": ["**/*.ts"],
+  "include": ["**/*.ts", "server.js"],
   "exclude": ["node_modules"]
 }

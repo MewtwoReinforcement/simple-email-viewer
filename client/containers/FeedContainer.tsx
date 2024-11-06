@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import Message from '../components/Message';
 import ExpandedMessage from '../components/ExpandedMessage';
 
-const FeedContainer = () => {
-  // would need to be an array, or set if we want multiple messages to be expanded at once
+import { FeedContainerProps } from '../types';
+
+const FeedContainer: React.FC<FeedContainerProps> = () => {
+  // would need to be an array, or Set if we want multiple messages to be expanded at once
   const [clickedID, setClickedID] = useState('');
 
   const fakeMessages = [
