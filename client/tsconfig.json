@@ -3,11 +3,11 @@
   "compilerOptions": {
     "outDir": "./dist/",
     "lib": ["dom", "es6"],
-    "jsx": "react",
+    "jsx": "react-jsx",
     "allowJs": false,
     "moduleResolution": "Node",
     "sourceMap": true
   },
-  "include": ["**/*.ts", "**/*.tsx", "**/*.d.ts"],
+  "include": ["**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
 }

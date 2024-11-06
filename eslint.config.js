@@ -1,15 +1,15 @@
-const js = require('@eslint/js');
-const react = require('eslint-plugin-react');
-const reactHooks = require('eslint-plugin-react-hooks');
-const reactRefresh = require('eslint-plugin-react-refresh');
-const stylisticTs = require('@stylistic/eslint-plugin-ts');
-const tseslint = require('typescript-eslint');
-const prettier = require('eslint-plugin-prettier');
-const prettierConfig = require('eslint-config-prettier');
-const globals = require('globals');
-const jest = require('eslint-plugin-jest');
+import js from '@eslint/js';
+import react from 'eslint-plugin-react';
+import reactHooks from 'eslint-plugin-react-hooks';
+import reactRefresh from 'eslint-plugin-react-refresh';
+import stylisticTs from '@stylistic/eslint-plugin-ts';
+import tseslint from 'typescript-eslint';
+import prettier from 'eslint-plugin-prettier';
+import prettierConfig from 'eslint-config-prettier';
+import globals from 'globals';
+import jest from 'eslint-plugin-jest';
 
-module.exports = [
+export default [
   // Core ESLint configuration
   js.configs.recommended,
   { ignores: ['**/dist/**', '**/coverage/**', '**/build/**'] },
@@ -24,7 +24,7 @@ module.exports = [
           './client/tsconfig.json',
           './server/tsconfig.json',
         ],
-        tsconfigRootDir: __dirname,
+        tsconfigRootDir: import.meta.dirname,
         createDefaultProgram: true,
       },
     },

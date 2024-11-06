@@ -2,17 +2,16 @@
   "name": "demo-repo",
   "version": "0.2.0",
   "description": "A sample package.json",
-  "type": "commonjs",
+  "type": "module",
   "scripts": {
     "build": "webpack",
-    "start": "NODE_ENV=production ts-node server/server.ts",
-    "dev": "NODE_ENV=development concurrently \"webpack serve\" \"nodemon\"",
+    "start": "cross-env NODE_ENV=production concurrently \"webpack\" \"tsx server/server.js\"",
+    "dev": "cross-env NODE_ENV=development concurrently \"webpack serve\" \"nodemon server/server.js\"",
     "test": "jest --verbose",
     "lint": "eslint ."
   },
   "license": "MIT",
   "dependencies": {
-    "@types/cors": "^2.8.17",
     "bcrpyt": "^2.0.0",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
@@ -22,8 +21,8 @@
     "imap": "^0.8.19",
     "mongodb": "^6.10.0",
     "mongoose": "^8.8.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "react-router-dom": "^6.27.0"
   },
   "devDependencies": {
@@ -31,6 +30,7 @@
     "@stylistic/eslint-plugin-ts": "^2.10.1",
     "@tsconfig/recommended": "^1.0.8",
     "@types/cookie-parser": "^1.4.7",
+    "@types/cors": "^2.8.17",
     "@types/eslint__js": "^8.42.3",
     "@types/express": "^5.0.0",
     "@types/jest": "^29.5.14",
@@ -63,8 +63,8 @@
     "style-loader": "^4.0.0",
     "supertest": "^7.0.0",
     "ts-loader": "^9.5.1",
-    "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
+    "tsx": "^4.19.2",
     "typescript": "^5.6.3",
     "typescript-eslint": "^8.13.0",
     "webpack": "^5.96.1",
@@ -75,7 +75,7 @@
     "watch": [
       "server"
     ],
-    "ext": "ts",
-    "exec": "ts-node -P server/tsconfig.json ./server/server.ts"
+    "exec": "tsx",
+    "ext": "ts,js"
   }
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import type { Header, MessageProps } from '../types.ts';
+import type { Header, MessageProps } from '../types';
 
 const expandedMessage: React.FC<MessageProps> = ({
   data,

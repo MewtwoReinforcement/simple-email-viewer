@@ -1,9 +1,9 @@
 import { RequestHandler, Request, Response, NextFunction } from 'express';
 import { google } from 'googleapis';
 import 'dotenv/config';
-import Message from '../models/MessageModel';
-import Contacts from '../models/ContactsModel';
-import User from '../models/userModel';
+import Message from '../models/MessageModel.ts';
+import Contacts from '../models/ContactsModel.ts';
+import User from '../models/userModel.ts';
 import { randomBytes } from 'crypto';
 
 const oAuth2Client = new google.auth.OAuth2(
@@ -21,7 +21,7 @@ const googleController: Record<string, RequestHandler> = {
    * An Express Middleware Function
    *  that redirects the user to a google OAuth 2.0 signin link
    */
-  initiateOAuth: (_req: Request, res: Response, next: NextFunction) => {
+  initiateOAuth: (_req: Request, res: Response, _next: NextFunction) => {
     const sessionId = generateSessionId();
     const cookieOptions =
       process.env.NODE_ENV === 'production'

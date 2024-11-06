@@ -1,5 +1,4 @@
 import { Schema, Document, model } from 'mongoose';
-import { NextFunction } from 'express';
 
 interface IUser extends Document {
   email: string;

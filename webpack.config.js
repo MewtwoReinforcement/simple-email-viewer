@@ -1,18 +1,17 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+import path from 'path';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 
-module.exports = {
+export default {
   entry: './client/index.tsx',
   output: {
-    path: path.join(__dirname, '/dist'),
+    path: path.join(import.meta.dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: '/',
   },
   mode: 'development',
   plugins: [new HtmlWebpackPlugin({ template: './client/index.html' })],
   devServer: {
     static: {
-      directory: path.resolve(__dirname, 'public'),
+      directory: path.resolve(import.meta.dirname, './client'),
     },
     port: 8080,
   },

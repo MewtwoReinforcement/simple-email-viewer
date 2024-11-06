@@ -1,3 +1,5 @@
+import React from 'react';
+
 export interface Message {
   id: string;
   threadId: string;
@@ -28,6 +30,25 @@ export interface MessagePartBody {
 export interface Header {
   name: string;
   value: string;
+}
+
+export interface FlaggedMessage extends Message {
+  flags: Set<Flag>;
+}
+
+export type Flag = 'contacts';
+export type Feed = 'contacts' | 'other';
+export type Contact = string;
+
+// ===================== PROPS TYPES ====================
+
+export interface NavBarProps {
+  selectedFeed: Feed;
+  setSelectedFeed: React.Dispatch<React.SetStateAction<Feed>>;
+}
+
+export interface FeedContainerProps {
+  messages: Message[];
 }
 
 export interface MessageProps {
