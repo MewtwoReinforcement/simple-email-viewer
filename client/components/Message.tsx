@@ -41,11 +41,15 @@ const Message: React.FC<MessageProps> = ({
   )?.value;
   return (
     <>
-      <button onClick={handleExpand}>↧</button>
-      <h3>{subject}</h3>
-      <p>{from}</p>
-      <p>{dateString}</p>
-      <p>{data.snippet}</p>
+      <div className='expandButton'>
+      <button onClick={handleExpand}>↥</button>
+      <div className='messageHead'>
+        <h3>{subject}</h3>
+        <p>{from}</p>
+        <p>{dateString}</p>
+        <p>{data.snippet}</p>
+      </div>
+    </div>
     </>
   );
 };

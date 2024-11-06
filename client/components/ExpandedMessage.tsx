@@ -20,7 +20,7 @@ const expandedMessage: React.FC<MessageProps> = ({
       body: {
         attachmentId: '70',
         size: 10,
-        data: "Hey, It's your pal Joe. Please Vote today...",
+        data: "Hey, It's your pal Joe. Please Vote today...Hey, It's your pal Joe. Please Vote today...Hey, It's your pal Joe. Please Vote today...Hey, It's your pal Joe. Please Vote today...Hey, It's your pal Joe. Please Vote today...Hey, It's your pal Joe. Please Vote today...Hey, It's your pal Joe. Please Vote today...Hey, It's your pal Joe. Please Vote today...Hey, It's your pal Joe. Please Vote today...Hey, It's your pal Joe. Please Vote today...Hey, It's your pal Joe. Please Vote today...Hey, It's your pal Joe. Please Vote today...Hey, It's your pal Joe. Please Vote today...Hey, It's your pal Joe. Please Vote today...Hey, It's your pal Joe. Please Vote today...",
       },
       parts: [],
     },
@@ -40,13 +40,17 @@ const expandedMessage: React.FC<MessageProps> = ({
     ({ name }: Header) => name === 'from',
   )?.value;
   return (
-    <>
+    <div className='expandedMessage, message'>
+    <div className='expandButton'>
       <button onClick={handleExpand}>↥</button>
-      <h3>{subject}</h3>
-      <p>{from}</p>
-      <p>{dateString}</p>
-      <p>{data.payload.body.data}</p>
-    </>
+      <div className='messageHead'>
+        <h3>{subject}</h3>
+        <p>{from}</p>
+        <p>{dateString}</p>
+      </div>
+    </div>
+      <p className='messageBody'>{data.payload.body.data}</p>
+    </div>
   );
 };
 export default expandedMessage;
