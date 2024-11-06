@@ -83,6 +83,8 @@ const AppContainer: React.FC = () => {
   const [filteredMessages, setFilteredMessages] = useState<FlaggedMessage[]>(flaggedMessages);
   const [contacts, setContacts] = useState<Set<Contact>>(new Set());
 
+  console.log("AppContainer Render");
+
   useEffect(() => {
     const googleIdCookie = document.cookie.match(/googleId=(\w*);/);
     setUserID((googleIdCookie || [''])[0]);

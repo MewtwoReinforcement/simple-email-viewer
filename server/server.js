@@ -5,11 +5,13 @@ import mongoose from 'mongoose';
 import 'dotenv/config';
 import googleController from './controllers/googleController.ts';
 import cookieParser from 'cookie-parser';
+import fetchForDatabase from './fetchForDatabase.ts';
 
 mongoose
   .connect(process.env.MONGO_URI)
   .then((result) => {
     console.log('DB connected', /*result*/);
+    setInterval(fetchForDatabase, 60000);
   })
   .catch((err) => {
     console.log('Failed', err);
