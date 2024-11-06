@@ -1,9 +1,9 @@
 import { RequestHandler, Request, Response, NextFunction } from 'express';
 import { google } from 'googleapis';
 import 'dotenv/config';
-import Message from '../models/MessageModel';
-import Contacts from '../models/ContactsModel';
-import User from '../models/userModel';
+import Message from '../models/MessageModel.ts';
+import Contacts from '../models/ContactsModel.ts';
+import User from '../models/userModel.ts';
 import { randomBytes } from 'crypto';
 
 const oAuth2Client = new google.auth.OAuth2(

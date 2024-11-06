@@ -3,7 +3,7 @@ import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import 'dotenv/config';
-import googleController from './controllers/googleController';
+import googleController from './controllers/googleController.ts';
 import cookieParser from 'cookie-parser';
 
 mongoose
@@ -22,7 +22,7 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
-app.use(express.static(path.resolve(__dirname, '../client/assets')));
+app.use(express.static(path.resolve(import.meta.dirname, '../client/assets')));
 
 app.get('/', (req, res) => {
   return res
