@@ -5,12 +5,13 @@ export interface IUser extends Document {
   email: string;
   googleId: string;
   oauthTokens: {
-    access_token: string | null;
+    access_token: string | null | undefined;
     refresh_token: string | null;
   };
   sessionId: string;
   contacts: Set<Contact>;
   messages: Map<string, Message>;
+  tokenExpiry: number;
 }
 
 const userSchema = new Schema<IUser>({
@@ -23,6 +24,7 @@ const userSchema = new Schema<IUser>({
   sessionId: { type: String, required: true },
   contacts: { type: Schema.Types.Mixed, required: true, default: new Set() },
   messages: { type: Schema.Types.Map, required: true, default: new Map() },
+  tokenExpiry: { type: Number, required: true },
 });
 
 const User = model<IUser>('User', userSchema);
