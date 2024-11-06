@@ -1,9 +1,14 @@
 {
   "extends": "../tsconfig.base.json",
   "compilerOptions": {
-    "module": "CommonJS",
-    "outDir": "./build"
+    "outDir": "./build",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "allowJs": true,
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+
   },
-  "include": ["**/*.ts"],
+  "include": ["**/*.ts", "server.js"],
   "exclude": ["node_modules"]
 }
