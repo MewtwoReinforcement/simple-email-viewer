@@ -2,8 +2,8 @@ import path from 'path';
 import express, { Request, Response } from 'express';
 // import cors from 'cors';
 import mongoose from 'mongoose';
-import dotenv from 'dotenv';
-dotenv.config();
+import 'dotenv/config';
+import googleController from './controllers/googleController';
 
 mongoose
   .connect(process.env.MONGO_URI as string)
@@ -38,6 +38,38 @@ app.post('/users', (req: Request, res: Response): void => {
     .status(200)
     .sendFile(path.resolve(__dirname, '../client/index.html'));
 });
+
+app.get(
+  '/users/:id/messages',
+  googleController.getMessages,
+  (req: Request, res: Response): void => {
+    return res.status(200).json(res.locals.messages);
+  }
+);
+
+app.get(
+  '/users/:id/contacts',
+  googleController.getContacts,
+  (req: Request, res: Response): void => {
+    return res.status(200).json(res.locals.contacts);
+  }
+);
+
+app.post(
+  '/users/:id/contacts',
+  googleController.addContacts,
+  (req: Request, res: Response): void => {
+    return res.status(200).json(res.locals.contacts);
+  }
+);
+
+app.delete(
+  '/users/:id/contacts',
+  googleController.addContacts,
+  (req: Request, res: Response): void => {
+    return res.status(200).json(res.locals.contacts);
+  }
+);
 
 app.get('/oauth', (_req: Request, res: Response) => {
   res.status(201).send('superb!');
