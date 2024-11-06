@@ -1,3 +1,7 @@
+// apiKey = 'AIzaSyBYsIc3X3A3H1aGpf28Uc3Ml30w-ndga94'
+import type { Message } from '../types.ts';
+
+
 const fakeMessage = {
   id: '2',
   threadId: 'thread123',
@@ -9,10 +13,7 @@ const fakeMessage = {
     partId: '1',
     mimeType: 'unknown',
     filename: 'email.txt',
-    headers: [
-      { name: 'from', value: 'joeBiden@whitehouse.gov' },
-      { name: 'from', value: 'donaldTrump@assholefuckface.gov' },
-    ],
+    headers: [{ name: 'from', value: 'joeBiden@whitehouse.gov' }],
     body: {
       attachmentId: '70',
       size: 10,
@@ -26,11 +27,12 @@ const fakeMessage = {
 
 console.log(fakeMessage.payload.headers[0].value);
 
-// get array of all messages
-// iterate through and filter out from: 'value' if found in contacts
-
-const whiteListed = (unfilteredMsgs, contactsArr) => {
-  //set from property to variable
-  const sender = message.payload.headers[0].value;
-  contactsArr.push(sender);
+// returns array of messages from senders in contacts
+const whiteListed = (unfilteredMsgs: Message[], contactsArr: []): Message[] => {
+  //in unfilteredMsgs, filter messages who's name: from object is fount in our contacts
+  unfilteredMsgs.filter((mess) => {
+    return contactsArr.includes(mess.payload.headers[0].value);
+  });
 };
+
+export default whiteListed;

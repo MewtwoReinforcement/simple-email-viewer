@@ -1,7 +1,7 @@
 import React from 'react';
-import type { Header, MessageProps } from '../types.ts';
+import type { Header, MessageProps } from '../types.js';
 
-const Message: React.FC<MessageProps> = ({
+const PreviewMessage: React.FC<MessageProps> = ({
   data,
   handleExpand,
 }): React.JSX.Element => {
@@ -49,4 +49,4 @@ const Message: React.FC<MessageProps> = ({
     </>
   );
 };
-export default Message;
+export default PreviewMessage;
