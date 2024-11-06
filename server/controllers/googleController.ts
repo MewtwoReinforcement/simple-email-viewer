@@ -114,10 +114,8 @@ const googleController: Record<string, RequestHandler> = {
           maxAge: 3600000,
         });
 
-        return res.json({
-          message: 'User successfully authenticated',
-          googleId: id,
-        });
+        res.locals.googleId = id;
+        return next();
       } catch (error) {
         return next({
           log:
