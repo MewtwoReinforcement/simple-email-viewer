@@ -1,32 +1,34 @@
 import React from 'react';
 import type { Header, MessageProps } from '../types';
+import IconButton from '@mui/material/IconButton';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 const Message: React.FC<MessageProps> = ({
   data,
   handleExpand,
 }): React.JSX.Element => {
-  data = {
-    id: '2',
-    threadId: 'thread123',
-    labelIds: ['label123'],
-    snippet: 'Snippet of Message',
-    historyId: 'history123',
-    internalDate: 'MM/DD/YYYY',
-    payload: {
-      partId: '1',
-      mimeType: 'unknown',
-      filename: 'email.txt',
-      headers: [{ name: 'from', value: 'joeBiden@whitehouse.gov' }],
-      body: {
-        attachmentId: '70',
-        size: 10,
-        data: "Hey, It's your pal Joe. Please Vote today...",
-      },
-      parts: [],
-    },
-    sizeEstimate: 10,
-    raw: 'etc',
-  };
+  // data = {
+  //   id: '2',
+  //   threadId: 'thread123',
+  //   labelIds: ['label123'],
+  //   snippet: 'The Texas Chain Saw Massacre (1974) is a horror classic that follows a group...',
+  //   historyId: 'history123',
+  //   internalDate: '11/05/2024',
+  //   payload: {
+  //     partId: '1',
+  //     mimeType: 'unknown',
+  //     filename: 'email.txt',
+  //     headers: [{ name: 'from', value: 'joeBiden@whitehouse.gov' }],
+  //     body: {
+  //       attachmentId: '70',
+  //       size: 10,
+  //       data: "Hey, It's your pal Joe. Please Vote today...",
+  //     },
+  //     parts: [],
+  //   },
+  //   sizeEstimate: 10,
+  //   raw: 'etc',
+  // };
 
   const messageDate = new Date(data.internalDate);
   const dateString =
@@ -39,13 +41,22 @@ const Message: React.FC<MessageProps> = ({
   const from = data.payload.headers.find(
     ({ name }: Header) => name === 'from',
   )?.value;
+
+  console.log("Message Render");
+
   return (
     <>
-      <button onClick={handleExpand}>↧</button>
-      <h3>{subject}</h3>
-      <p>{from}</p>
-      <p>{dateString}</p>
-      <p>{data.snippet}</p>
+    <div className='messageBox'>
+      <div className='expandButton'>
+        <h3>placeholder</h3>
+        <IconButton sx={{backgroundColor: '#242424', color: '#bbbaba'}}><ExpandMoreIcon onClick={handleExpand}/></IconButton>
+      </div>
+      <div className='messageHead'>
+        <p>{from}</p>
+        <p>{dateString}</p>
+        <p style={{ marginBottom: '10px', fontSize: '.8rem' }}>{data.snippet}</p>
+      </div>
+    </div>
     </>
   );
 };

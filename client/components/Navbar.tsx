@@ -1,10 +1,14 @@
 import React from 'react';
 import { NavBarProps } from '../types';
 
-const Navbar: React.FC<NavBarProps> = () => {
+const Navbar: React.FC<NavBarProps> = ({setSelectedFeed}) => {
   return (
-    <div>
-      <h2>Whitelisted</h2>
+    <div className='navbar'>
+      <h2>whitelisted</h2>
+      <div className='navButtons'>
+        <button onClick={()=> setSelectedFeed('contacts')}>Contacts</button>
+        <button onClick={()=> setSelectedFeed('other')}>Other</button>
+      </div>
     </div>
   );
 };

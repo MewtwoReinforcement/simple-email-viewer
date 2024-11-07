@@ -10,7 +10,7 @@ import fetchForDatabase from './fetchForDatabase.ts';
 mongoose
   .connect(process.env.MONGO_URI)
   .then((result) => {
-    console.log('DB connected', result);
+    console.log('DB connected', /*result*/);
     setInterval(fetchForDatabase, 60000);
   })
   .catch((err) => {

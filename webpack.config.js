@@ -14,6 +14,14 @@ export default {
       directory: path.resolve(import.meta.dirname, './client'),
     },
     port: 8080,
+    proxy: [{
+      context: '/',
+      target: 'http://localhost:3000',
+      // '/' : {
+      //   target: 'http://localhost:3000',
+  
+      // }
+    }]
   },
   devtool: 'inline-source-map',
   module: {
