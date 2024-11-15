@@ -2,7 +2,7 @@ import js from '@eslint/js';
 import react from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
-import stylisticTs from '@stylistic/eslint-plugin-ts';
+import stylistic from '@stylistic/eslint-plugin';
 import tseslint from 'typescript-eslint';
 import prettier from 'eslint-plugin-prettier';
 import prettierConfig from 'eslint-config-prettier';
@@ -30,10 +30,8 @@ export default [
     },
     plugins: {
       '@typescript-eslint': tseslint,
-      '@stylistic/ts': stylisticTs,
     },
     rules: {
-      '@stylistic/ts/indent': ['error', 2],
       ...tseslint.configs.strictTypeChecked.rules,
       ...tseslint.configs.stylisticTypeChecked.rules,
     },
@@ -47,6 +45,7 @@ export default [
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
       prettier: prettier,
+      '@stylistic': stylistic,
     },
     languageOptions: {
       parserOptions: {
@@ -65,24 +64,20 @@ export default [
     },
     rules: {
       semi: 'error',
-      quotes: ['error', 'single'],
       'prefer-const': 'error',
       'react-refresh/only-export-components': [
         'warn',
         { allowConstantExport: true },
       ],
-      'no-unused-vars': [
-        'error',
-        { argsIgnorePattern: '^(_|_req|_res|_next|)$' },
-      ],
-      'prettier/prettier': ['error', { singleQuote: true }],
-      'no-confusing-arrow': 'off',
+      'no-unused-vars': ['error', { argsIgnorePattern: '^(_.*)$' }],
       ...react.configs.recommended.rules,
       ...react.configs['jsx-runtime'].rules,
       ...prettierConfig.rules,
+      'prettier/prettier': 'warn',
     },
   },
 
+  // Tests rules
   {
     files: ['**/__tests__/**/*.[jt]s?(x)'],
     plugins: {

@@ -2,7 +2,7 @@
   "extends": "./node_modules/@tsconfig/recommended/tsconfig.json",
   "compilerOptions": {
     "module": "ES6",
-    "target": "ES5",
+    "target": "ES6",
     "skipLibCheck": true,
     "esModuleInterop": true,
     "strict": true,

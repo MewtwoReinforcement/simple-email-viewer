@@ -6,7 +6,8 @@
   "editor.formatOnSaveMode": "file",
   "files.autoSave": "onFocusChange",
 
-  "prettier.singleQuote": true,
+  "prettier.configPath": "prettier.config.js",
+
   "eslint.validate": [
     "javascript",
     "javascriptreact",

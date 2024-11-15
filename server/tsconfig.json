@@ -9,6 +9,6 @@
     "allowImportingTsExtensions": true,
 
   },
-  "include": ["**/*.ts", "server.js"],
+  "include": ["**/*.ts", "server.ts"],
   "exclude": ["node_modules"]
 }

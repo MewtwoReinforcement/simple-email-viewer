@@ -14,14 +14,13 @@ export default {
       directory: path.resolve(import.meta.dirname, './client'),
     },
     port: 8080,
-    proxy: [{
-      context: '/',
-      target: 'http://localhost:3000',
-      // '/' : {
-      //   target: 'http://localhost:3000',
-  
-      // }
-    }]
+    proxy: [
+      {
+        context: '/api/',
+        target: 'http://localhost:3000',
+      },
+    ],
+    historyApiFallback: true,
   },
   devtool: 'inline-source-map',
   module: {

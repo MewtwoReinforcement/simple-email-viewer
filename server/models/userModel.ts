@@ -7,11 +7,19 @@ export interface IUser extends Document {
   oauthTokens: {
     access_token: string | null | undefined;
     refresh_token: string | null;
+    tokenExpiry: number;
   };
   sessionId: string;
-  contacts: Set<Contact>;
+  contacts: Map<Contact, null>;
   messages: Map<string, Message>;
-  tokenExpiry: number;
+  messageTokens: {
+    gmailQuery: string;
+    pageToken: string;
+  };
+  contactTokens: {
+    syncToken: string;
+    pageToken: string;
+  };
 }
 
 const userSchema = new Schema<IUser>({
@@ -20,13 +28,19 @@ const userSchema = new Schema<IUser>({
   oauthTokens: {
     access_token: { type: String, required: true, default: null },
     refresh_token: { type: String, required: true, default: null },
+    tokenExpiry: { type: Number, required: true },
   },
   sessionId: { type: String, required: true },
-  contacts: { type: Schema.Types.Mixed, required: true, default: new Set() },
+  contacts: { type: Schema.Types.Map, required: true, default: new Map() },
   messages: { type: Schema.Types.Map, required: true, default: new Map() },
-  tokenExpiry: { type: Number, required: true },
+  messageTokens: {
+    gmailQuery: { type: String, required: false },
+    pageToken: { type: String, required: false },
+  },
+  contactTokens: {
+    syncToken: { type: String, required: false },
+    pageToken: { type: String, required: false },
+  },
 });
 
-const User = model<IUser>('User', userSchema);
-
-export default User;
+export default model<IUser>('User', userSchema);

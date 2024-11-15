@@ -52,6 +52,17 @@ export interface FeedContainerProps {
 }
 
 export interface MessageProps {
-  data: Message;
+  messageData: Message;
   handleExpand: () => void;
+}
+
+// ===================== BACKEND TYPES ====================
+
+export interface ContactConfig {
+  resourceName: string;
+  personFields: string;
+  pageSize: number;
+  requestSyncToken: boolean;
+  syncToken?: string;
+  pageToken?: string;
 }
